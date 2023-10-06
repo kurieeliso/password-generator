@@ -1,38 +1,127 @@
-.App {
-  text-align: center;
+.mainBlock {
+  background-color: #212121;
+  width: 100%;
+  height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.box {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  height: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+.title {
+  border-bottom: 1px solid rgba(60, 60, 60, 0.8);
+  margin: 0;
+  padding: 0 0 1.4rem 0;
+  display: block;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.currentLength {
+  padding: 1.2rem 0;
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.password {
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  /*padding: 0.6rem 0;*/
+  background-color: #152362;
+  border-radius: 2px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonCopy {
+  padding: 1rem 0;
+}
+
+.buttonCopy button{
+  background: none;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  font-weight: 800;
+  background: #ddd;
+  font-size: 1rem;
+  border-radius: 2px;
+  padding: 0.4rem 2rem;
+  border: none;
+}
+
+.rangeWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0 1rem 0;
+  width: 100%;
+  align-items: center;
+  border: 1px solid rgba(60, 60, 60, 0.8);
+  height: 50px;
+  border-radius: 2px;
+}
+
+.rangeWrapper span {
+  font-weight: 800;
+  padding: 1rem;
+}
+
+.rangeBox {
+  width: 100%;
+}
+
+.rangeBox input {
+  width: 100%;
+}
+
+.childrenBlock {
+  padding: 2rem 3rem;
+  border-radius: 2px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  background-color: #212121;
+  border: 1px solid rgba(60, 60, 60, 0.8);
+  min-width: 30rem;
+  color: #f2f2f2;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+  border: 1px solid rgba(60, 60, 60, 0.8);
+  /*padding: 1rem;*/
+  border-radius: 2px;
+  font-weight: 800;
+}
+
+.wrapper label {
+  width: 100%;
+  padding: 1rem;
+}
+
+.generatorButton {
+  width: 100%;
+  margin: 1.8rem 0 0 0;
+}
+
+.generatorButton button {
+  padding: 1rem 4rem;
+  background: none;
+  border: 1px solid rgba(60, 60, 60, 0.8);
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: #fff;
+  width: 100%;
+}
+
+.wrapChecked {
+  height: 100%;
+  width: 10%;
 }
