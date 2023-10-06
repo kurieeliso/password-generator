@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+<img width="639" alt="image" src="https://github.com/kurieeliso/password-generator/assets/89018669/e628b411-cd82-4020-beeb-c7e1d55ae07f">
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
