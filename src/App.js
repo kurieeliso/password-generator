@@ -11,11 +11,15 @@ function App() {
     symbols: false,
   })
 
-  const handleChange = useCallback(() => {
+  const handleChange = useCallback((e) => {
+    e.preventDefault()
+    const random = Math.random().toString(32).substring(2,50)
+
+    setPassword(random)
 
   }, [])
 
-  console.log(state)
+  console.log(password.length)
 
   return <div className={ 'mainBlock' }>
     <div className={ 'box' }>
@@ -66,12 +70,12 @@ function App() {
             <label htmlFor="LowerCase">Include LowerCase </label>
             <div className={ 'wrapChecked' }>
               <input
-                onChange={(v) => {
+                onChange={ (v) => {
                   setState({
                     ...state,
-                    lowerCase: v.target.checked
+                    lowerCase: v.target.checked,
                   })
-                }}
+                } }
                 type="checkbox"
                 id={ 'LowerCase' }
               />
@@ -81,12 +85,12 @@ function App() {
             <label htmlFor="Number">Include Number </label>
             <div className={ 'wrapChecked' }>
               <input
-                onChange={(v) => {
+                onChange={ (v) => {
                   setState({
                     ...state,
-                    number: v.target.checked
+                    number: v.target.checked,
                   })
-                }}
+                } }
                 type="checkbox"
                 id={ 'Number' }
               />
@@ -96,12 +100,12 @@ function App() {
             <label htmlFor="Symbols">Include Symbols </label>
             <div className={ 'wrapChecked' }>
               <input
-                onChange={(v) => {
-                 setState({
-                   ...state,
-                   symbols: v.target.checked
-                 })
-                }}
+                onChange={ (v) => {
+                  setState({
+                    ...state,
+                    symbols: v.target.checked,
+                  })
+                } }
                 type="checkbox"
                 id={ 'Symbols' }
               />
