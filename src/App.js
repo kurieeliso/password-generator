@@ -1,25 +1,66 @@
 import React, { useCallback, useState } from 'react'
+import { v4 as uuid } from 'uuid'
 import './App.css'
 
+const PASSWORD_LEN_MIN = 4
+const PASSWORD_LEN_MAX = 32
+const PASSWORD_LEN_DEF = 6
+const OPTIONS = [
+  {
+    title: 'Include Number',
+    id: uuid(),
+    labelTitle: 'number',
+    checked: true,
+  },
+  {
+    title: 'Include Symbols',
+    id: uuid(),
+    labelTitle: 'symbols',
+    checked: false,
+  },
+  {
+    title: 'Include LowerCase',
+    id: uuid(),
+    labelTitle: 'lowerCase',
+    checked: false,
+  },
+  {
+    title: 'Include UpperCase',
+    id: uuid(),
+    labelTitle: 'upperCase',
+    checked: false,
+  },
+]
+
 function App() {
-  const [range, setRange] = useState(10)
+  const [range, setRange] = useState(PASSWORD_LEN_DEF)
   const [password, setPassword] = useState('....')
   const [state, setState] = useState({
-    uppercase: false,
+    upperCase: false,
     lowerCase: false,
-    number: false,
+    number: true,
     symbols: false,
   })
 
-  const handleChange = useCallback((e) => {
+  const generatePassword = useCallback((e) => {
     e.preventDefault()
-    const random = Math.random().toString(32).substring(2,50)
+    let charsets = ''
+    let newPassword = ''
 
-    setPassword(random)
+    if (!!state.number) charsets += '1234567890'
+    if (!!state.symbols) charsets += '!@#$%^&*()'
+    if (!!state.lowerCase) charsets += 'abcdefghijklmnopqrstuvwxyz'
+    if (!!state.upperCase) charsets += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-  }, [])
+    for (let i = 0; i < range; i++) {
+      newPassword += charsets.charAt(
+        Math.floor(Math.random() * charsets.length),
+      )
+    }
 
-  console.log(password.length)
+    setPassword(newPassword)
+
+  }, [range, state])
 
   return <div className={ 'mainBlock' }>
     <div className={ 'box' }>
@@ -31,10 +72,10 @@ function App() {
         <div className={ 'password' }>
           <b>{ password }</b>
         </div>
-        <form onSubmit={ handleChange }>
+        <form onSubmit={ generatePassword }>
           <div className={ 'rangeWrapper' }>
             <div>
-              <span>10</span>
+              <span>{ PASSWORD_LEN_MIN }</span>
             </div>
             <div className={ 'rangeBox' }>
               <input
@@ -43,77 +84,42 @@ function App() {
                 onChange={ (v) => {
                   setRange(v.target.value)
                 } }
-                min={ 10 }
-                max={ 40 }
+                min={ PASSWORD_LEN_MIN }
+                max={ PASSWORD_LEN_MAX }
               />
             </div>
             <div>
-              <span>40</span>
-            </div>
-          </div>
-          <div className="wrapper">
-            <label htmlFor="includeUpperCase">Include Uppercase </label>
-            <div className={ 'wrapChecked' }>
-              <input
-                onChange={ (v) => {
-                  setState({
-                    ...state,
-                    uppercase: v.target.checked,
-                  })
-                } }
-                type="checkbox"
-                id={ 'includeUpperCase' }
-              />
-            </div>
-          </div>
-          <div className="wrapper">
-            <label htmlFor="LowerCase">Include LowerCase </label>
-            <div className={ 'wrapChecked' }>
-              <input
-                onChange={ (v) => {
-                  setState({
-                    ...state,
-                    lowerCase: v.target.checked,
-                  })
-                } }
-                type="checkbox"
-                id={ 'LowerCase' }
-              />
-            </div>
-          </div>
-          <div className="wrapper">
-            <label htmlFor="Number">Include Number </label>
-            <div className={ 'wrapChecked' }>
-              <input
-                onChange={ (v) => {
-                  setState({
-                    ...state,
-                    number: v.target.checked,
-                  })
-                } }
-                type="checkbox"
-                id={ 'Number' }
-              />
-            </div>
-          </div>
-          <div className="wrapper">
-            <label htmlFor="Symbols">Include Symbols </label>
-            <div className={ 'wrapChecked' }>
-              <input
-                onChange={ (v) => {
-                  setState({
-                    ...state,
-                    symbols: v.target.checked,
-                  })
-                } }
-                type="checkbox"
-                id={ 'Symbols' }
-              />
+              <span>{ PASSWORD_LEN_MAX }</span>
             </div>
           </div>
 
+          { OPTIONS.map((item) => {
+            return <div className="wrapper" key={ item.id }>
+              <label htmlFor={ item.labelTitle }>{ item.title } </label>
+              <div className={ 'wrapChecked' }>
+                <input
+                  checked={ item.checked }
+                  name={ item.labelTitle }
+                  // checked={state.}
+                  onChange={ (e) => {
+                    item.checked = e.target.checked
+                    setState({
+                      ...state,
+                      [e.target.name]: e.target.checked,
+                    })
+                  } }
+                  type="checkbox"
+                />
+              </div>
+            </div>
+          }) }
           <div className={ 'generatorButton' }>
-            <button type="submit">Generate Password</button>
+            <button
+              disabled={ !state.number && !state.symbols && !state.upperCase && !state.lowerCase }
+              type="submit"
+            >
+              Generate Password
+            </button>
           </div>
         </form>
       </div>
