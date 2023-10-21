@@ -100,7 +100,6 @@ function App() {
                 <input
                   checked={ item.checked }
                   name={ item.labelTitle }
-                  // checked={state.}
                   onChange={ (e) => {
                     item.checked = e.target.checked
                     setState({
